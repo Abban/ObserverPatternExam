@@ -11,10 +11,9 @@ public class GameStateService
 
     public void Init(int coins, int stars)
     {
-        State = new GameState
-        {
-            Coins = coins,
-            Stars = stars
-        };
+        State = new GameState(
+            coins,
+            stars
+        );
     }
 }

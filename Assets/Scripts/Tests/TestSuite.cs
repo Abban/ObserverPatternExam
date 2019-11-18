@@ -12,8 +12,8 @@ namespace Tests
 
             var gameState = gameStateService.State;
         
-            Assert.That(gameState.Coins, Is.EqualTo(10));
-            Assert.That(gameState.Stars, Is.EqualTo(0));
+            Assert.That(gameState.Coins.Value, Is.EqualTo(10));
+            Assert.That(gameState.Stars.Value, Is.EqualTo(0));
         }
 
         [Test]
@@ -24,10 +24,10 @@ namespace Tests
 
             var gameState = gameStateService.State;
             var stateObserverCalled = false;
-            gameState.CoinsChanged += () =>
+            gameState.Coins.Action += () =>
             {
                 stateObserverCalled = true;
-                Assert.That(gameState.Coins, Is.EqualTo(8));
+                Assert.That(gameState.Coins.Value, Is.EqualTo(8));
             };
             
             ShopService.Get().UseCoins(2);
@@ -46,12 +46,12 @@ namespace Tests
             {
                 stateObserverCalled = true;
                 var gameState = gameStateService.State;
-                Assert.That(gameState.Stars, Is.EqualTo(1));
-                Assert.That(gameState.Coins, Is.EqualTo(9));
+                Assert.That(gameState.Stars.Value, Is.EqualTo(1));
+                Assert.That(gameState.Coins.Value, Is.EqualTo(9));
             }
 
-            gameStateService.State.CoinsChanged += StateValidator;
-            gameStateService.State.StarsChanged += StateValidator;
+            gameStateService.State.Coins.Action += StateValidator;
+            gameStateService.State.Stars.Action += StateValidator;
 
             var shopService = ShopService.Get();
             shopService.BuyStars(1, 1);

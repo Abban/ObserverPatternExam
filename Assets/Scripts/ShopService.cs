@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 public class ShopService
 {
     private static readonly ShopService _instance = new ShopService();
@@ -7,15 +9,26 @@ public class ShopService
     {
         return _instance;
     }
+    
+    public void BuyStars(int stars)
+    {
+        var gameStateService = GameStateService.Get();
+        
+        gameStateService.State.Stars.Value += stars;
+        gameStateService.State.EndTransaction();
+    }
 
     public void BuyStars(int stars, int forCoins)
     {
-        GameStateService.Get().State.Stars += stars;
+        GameStateService.Get().State.Stars.Value += stars;
         UseCoins(forCoins);
     }
 
     public void UseCoins(int coins)
     {
-        GameStateService.Get().State.Coins -= coins;
+        var gameStateService = GameStateService.Get();
+        
+        gameStateService.State.Coins.Value -= coins;
+        gameStateService.State.EndTransaction();
     }
 }

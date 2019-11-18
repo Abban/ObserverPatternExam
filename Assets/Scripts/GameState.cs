@@ -1,40 +1,14 @@
-using System;
-
-public class GameState
+public class GameState : ObservableState
 {
-    private int _coins;
+    public IObservableStateProperty<int> Coins { get; }
+    public IObservableStateProperty<int> Stars { get; }
 
-    public event Action CoinsChanged = () => { };
-    public int Coins
+
+    public GameState(
+        int coins,
+        int stars)
     {
-        get => _coins;
-        set
-        {
-            var coins = _coins;
-            _coins = value;
-
-            if (value != coins)
-            {
-                CoinsChanged();
-            }
-        }
-    }
-
-    private int _stars;
-    
-    public event Action StarsChanged = () => { };
-    public int Stars
-    {
-        get => _stars;
-        set
-        {
-            var stars = _stars;
-            _stars = value;
-
-            if (value != stars)
-            {
-                StarsChanged();
-            }
-        }
+        Coins = new ObservableStateProperty<int>(this, coins);
+        Stars = new ObservableStateProperty<int>(this, stars);
     }
 }
