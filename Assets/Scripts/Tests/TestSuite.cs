@@ -81,8 +81,10 @@ namespace Tests
             gameStateService.State.Coins.Action += StateValidator;
             gameStateService.State.Stars.Action += StateValidator;
 
-            var shopService = ShopService.Get();
-            shopService.BuyStars(1, 1);
+            gameStateService.State.Coins.Value += 2;
+            gameStateService.State.Stars.Value += 2;
+            
+            gameStateService.State.NotifyObservers();
 
             Assert.That(stateObserverCalled, "Observer not called");
             Assert.That(callCount == 1, "Observer called too many times");
@@ -92,7 +94,7 @@ namespace Tests
         [Test]
         public void ObservableStateProperty_OnChangeValue_NotifiesPropertyStateBroker()
         {
-            var stateBroker = new MockPropertyStateBroker();
+            var stateBroker = new MockStatePropertyBroker();
             var coins = new ObservableStateProperty<int>(stateBroker, 10);
             coins.Value -= 2;
 
@@ -100,7 +102,7 @@ namespace Tests
         }
 
 
-        private class MockPropertyStateBroker : IPropertyStateBroker
+        private class MockStatePropertyBroker : IStatePropertyBroker
         {
             public bool Changed { get; private set; }
 

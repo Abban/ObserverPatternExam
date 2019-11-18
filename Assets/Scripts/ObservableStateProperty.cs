@@ -2,7 +2,7 @@ using System;
 
 public class ObservableStateProperty<T> : IObservableStateProperty<T>
 {
-    private readonly IPropertyStateBroker _observableStateBroker;
+    private readonly IStatePropertyBroker _stateBroker;
 
     private T _value;
 
@@ -16,7 +16,7 @@ public class ObservableStateProperty<T> : IObservableStateProperty<T>
 
             if (!Equals(value, oldValue))
             {
-                _observableStateBroker.SetChanged(this);
+                _stateBroker.SetChanged(this);
             }
         }
     }
@@ -24,10 +24,10 @@ public class ObservableStateProperty<T> : IObservableStateProperty<T>
     public Action Action { get; set; } = () => { };
 
     public ObservableStateProperty(
-        IPropertyStateBroker observableStateBroker,
+        IStatePropertyBroker stateBroker,
         T startValue)
     {
-        _observableStateBroker = observableStateBroker;
+        _stateBroker = stateBroker;
         _value = startValue;
     }
 }

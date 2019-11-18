@@ -1,4 +1,4 @@
-public interface IPropertyStateBroker
+public interface IStatePropertyBroker
 {
     /// <summary>
     /// a target for a property to alert to a value change

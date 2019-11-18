@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-public abstract class ObservableStateBroker : IPropertyStateBroker
+public class ObservableStateBroker : IStatePropertyBroker, IStateObserverNotifier
 {
-    protected List<IObservableStateProperty> ChangedProperties = new List<IObservableStateProperty>();
+    protected readonly List<IObservableStateProperty> ChangedProperties = new List<IObservableStateProperty>();
 
 
     /// <inheritdoc />
