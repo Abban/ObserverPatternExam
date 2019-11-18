@@ -2,7 +2,7 @@ using System;
 
 public class ObservableStateProperty<T> : IObservableStateProperty<T>
 {
-    private readonly IObservableStateBroker _observableStateBroker;
+    private readonly IPropertyStateBroker _observableStateBroker;
 
     private T _value;
 
@@ -24,7 +24,7 @@ public class ObservableStateProperty<T> : IObservableStateProperty<T>
     public Action Action { get; set; } = () => { };
 
     public ObservableStateProperty(
-        IObservableStateBroker observableStateBroker,
+        IPropertyStateBroker observableStateBroker,
         T startValue)
     {
         _observableStateBroker = observableStateBroker;
