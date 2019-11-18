@@ -58,5 +58,27 @@ namespace Tests
             
             Assert.That(stateObserverCalled, "Observer not called");
         }
+
+        [Test]
+        public void ObservableStateProperty_OnChangeValue_NotifiesObservableState()
+        {
+            var observableState = new MockObservableStateBroker();
+            var coins = new ObservableStateProperty<int>(observableState, 10);
+            coins.Value -= 2;
+            
+            Assert.That(observableState.Changed);
+        }
+        
+        
+        
+        private class MockObservableStateBroker : IObservableStateBroker
+        {
+            public bool Changed { get; private set; }
+
+            public void SetChanged(IObservableStateProperty property)
+            {
+                Changed = true;
+            }
+        }
     }
 }

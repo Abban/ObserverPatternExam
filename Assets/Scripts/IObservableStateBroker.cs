@@ -1,4 +1,4 @@
-public interface IObservableState
+public interface IObservableStateBroker
 {
     void SetChanged(IObservableStateProperty property);
 }

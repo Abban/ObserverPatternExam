@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public abstract class ObservableState : IObservableState
+public abstract class ObservableState : IObservableStateBroker
 {
     protected List<IObservableStateProperty> ChangedProperties = new List<IObservableStateProperty>();
 
