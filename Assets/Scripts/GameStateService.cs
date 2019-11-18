@@ -11,9 +11,14 @@ public class GameStateService
 
     public void Init(int coins, int stars)
     {
+        var stateBroker = new ObservableStateBroker();
+        var coinsProperty = new ObservableStateProperty<int>(stateBroker, coins);
+        var starsProperty = new ObservableStateProperty<int>(stateBroker, stars);
+        
         State = new GameState(
-            coins,
-            stars
+            stateBroker,
+            coinsProperty,
+            starsProperty
         );
     }
 }

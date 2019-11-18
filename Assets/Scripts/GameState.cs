@@ -1,18 +1,18 @@
 public class GameState : IStateObserverNotifier
 {
-    private readonly ObservableStateBroker _stateBroker;
-    public void NotifyObservers() => _stateBroker.NotifyObservers();
+    private readonly IStateObserverNotifier _stateNotifier;
+    public void NotifyObservers() => _stateNotifier.NotifyObservers();
     public IObservableStateProperty<int> Coins { get; }
     public IObservableStateProperty<int> Stars { get; }
 
 
     public GameState(
-        int coins,
-        int stars)
+        IStateObserverNotifier stateNotifier,
+        IObservableStateProperty<int> coins,
+        IObservableStateProperty<int> stars)
     {
-        _stateBroker = new ObservableStateBroker();
-        
-        Coins = new ObservableStateProperty<int>(_stateBroker, coins);
-        Stars = new ObservableStateProperty<int>(_stateBroker, stars);
+        _stateNotifier = stateNotifier;
+        Coins = coins;
+        Stars = stars;
     }
 }
