@@ -1,4 +1,4 @@
-public class GameState : ObservableState
+public class GameState : ObservableStateBroker
 {
     public IObservableStateProperty<int> Coins { get; }
     public IObservableStateProperty<int> Stars { get; }
