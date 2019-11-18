@@ -84,7 +84,7 @@ namespace Tests
             gameStateService.State.Coins.Value += 2;
             gameStateService.State.Stars.Value += 2;
             
-            gameStateService.State.NotifyObservers();
+            gameStateService.Notifier.NotifyObservers();
 
             Assert.That(stateObserverCalled, "Observer not called");
             Assert.That(callCount == 1, "Observer called too many times");

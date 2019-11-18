@@ -12,7 +12,7 @@ public class ShopService
         var gameStateService = GameStateService.Get();
         
         gameStateService.State.Stars.Value += stars;
-        gameStateService.State.NotifyObservers();
+        gameStateService.Notifier.NotifyObservers();
     }
 
     public void BuyStars(int stars, int forCoins)
@@ -26,6 +26,6 @@ public class ShopService
         var gameStateService = GameStateService.Get();
         
         gameStateService.State.Coins.Value -= coins;
-        gameStateService.State.NotifyObservers();
+        gameStateService.Notifier.NotifyObservers();
     }
 }

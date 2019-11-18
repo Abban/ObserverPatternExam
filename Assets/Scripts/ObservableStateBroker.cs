@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public class ObservableStateBroker : IStatePropertyBroker, IStateObserverNotifier
 {
-    protected readonly List<IObservableStateProperty> ChangedProperties = new List<IObservableStateProperty>();
+    private readonly List<IObservableStateProperty> _changedProperties = new List<IObservableStateProperty>();
 
 
     /// <inheritdoc />
     public void SetChanged(IObservableStateProperty property)
     {
-        ChangedProperties.Add(property);
+        _changedProperties.Add(property);
     }
 
     
@@ -21,7 +21,7 @@ public class ObservableStateBroker : IStatePropertyBroker, IStateObserverNotifie
         var called = new List<Delegate>();
         
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var property in ChangedProperties)
+        foreach (var property in _changedProperties)
         {
             var delegates = property.Action.GetInvocationList();
 
@@ -34,6 +34,6 @@ public class ObservableStateBroker : IStatePropertyBroker, IStateObserverNotifie
             }
         }
         
-        ChangedProperties.Clear();
+        _changedProperties.Clear();
     }
 }

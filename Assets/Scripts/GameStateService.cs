@@ -8,15 +8,17 @@ public class GameStateService
     }
 
     public GameState State { get; private set; }
+    public IStateObserverNotifier Notifier { get; private set; }
 
     public void Init(int coins, int stars)
     {
-        var stateBroker = new ObservableStateBroker();
-        var coinsProperty = new ObservableStateProperty<int>(stateBroker, coins);
-        var starsProperty = new ObservableStateProperty<int>(stateBroker, stars);
+        Notifier = new ObservableStateBroker();
+        var broker = Notifier as IStatePropertyBroker;
+        
+        var coinsProperty = new ObservableStateProperty<int>(broker, coins);
+        var starsProperty = new ObservableStateProperty<int>(broker, stars);
         
         State = new GameState(
-            stateBroker,
             coinsProperty,
             starsProperty
         );
