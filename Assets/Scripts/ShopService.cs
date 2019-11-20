@@ -17,8 +17,11 @@ public class ShopService
 
     public void BuyStars(int stars, int forCoins)
     {
-        GameStateService.Get().State.Stars.Value += stars;
-        UseCoins(forCoins);
+        var gameStateService = GameStateService.Get();
+        
+        gameStateService.State.Stars.Value += stars;
+        gameStateService.State.Coins.Value -= forCoins;
+        gameStateService.Notifier.NotifyObservers();
     }
 
     public void UseCoins(int coins)
