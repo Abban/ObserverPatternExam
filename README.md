@@ -52,13 +52,3 @@ This is really important:
 
 When we look at your code we will not think: Ah you would not have pushed this in a real project.
 We will take this as it is.
-
-So please make sure that you do the best you can do. Take your time. We know that you might have other
-things to do. So it is entirly ok if you submit your result 7 days after you got the assignment.
-If you need more time please just drop us a note so that we know that you are still interested.
-
-Thanks and happy coding!
-
-We are looking forward to your solution and hopefully to meet you soon!
-
- 
